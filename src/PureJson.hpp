@@ -1,8 +1,8 @@
 #pragma once
-#ifndef HAS_PUREJSON_HPP
-#define HAS_PUREJSON_HPP
 #include <sstream>
 #include <string>
+#ifndef HAS_PUREJSON_HPP
+    #define HAS_PUREJSON_HPP
 
 std::string RemoveComment(const std::string &source)
 {
@@ -23,16 +23,11 @@ std::string RemoveComment(const std::string &source)
 
         for (size_t i = 0; i < text.length(); i++)
         {
-            if (isInLineComment)
-                continue;
+            if (isInLineComment) continue;
 
             auto current = text.at(i);
-            auto priv = (i == 0)
-                            ? '\0'
-                            : text.at(i - 1);
-            auto next = (i == text.length() - 1)
-                            ? '\0'
-                            : text.at(i + 1);
+            auto priv = (i == 0) ? '\0' : text.at(i - 1);
+            auto next = (i == text.length() - 1) ? '\0' : text.at(i + 1);
             //
             bool currentIsBeingEscaped = false;
 
@@ -105,11 +100,8 @@ std::string RemoveComment(const std::string &source)
     return targetText;
 }
 
-#ifdef QT_CORE_LIB
-#include <QString>
-QString RemoveComment(const QString &str)
-{
-    return QString::fromStdString(RemoveComment(str.toStdString()));
-}
-#endif
+    #ifdef QT_CORE_LIB
+        #include <QString>
+QString RemoveComment(const QString &str) { return QString::fromStdString(RemoveComment(str.toStdString())); }
+    #endif
 #endif // HAS_PUREJSON_HPP
