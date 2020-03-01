@@ -1,5 +1,5 @@
-# PureJson
-A C++ helper library to remove comments from Json.
+# PureSource
+A C++ helper library to remove comments from any C style source codes.
 
 ## Examples
 - Please check the `examples` folder for usage in Qt or check the [test file](tests/main.cpp)
@@ -50,5 +50,5 @@ target:    "//this is not a comment, it's /*in the string*/ ", and '//those are 
 ```
 
 # Lincese:
-PureJson is using MIT
+PureSource is using MIT
 
