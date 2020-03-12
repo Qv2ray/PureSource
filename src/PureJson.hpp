@@ -1,8 +1,14 @@
 #pragma once
-#include <sstream>
-#include <string>
 #ifndef HAS_PUREJSON_HPP
     #define HAS_PUREJSON_HPP
+    #include <sstream>
+    #include <string>
+    #include <string_view>
+    #if !defined(_WIN32) && (defined(__unix__) || defined(__unix) || (defined(__APPLE__) && defined(__MACH__)))
+        #define EOL_STRING "\n"
+    #else
+        #define EOL_STRING "\r\n"
+    #endif
 
 std::string RemoveComment(const std::string &source)
 {
@@ -23,7 +29,8 @@ std::string RemoveComment(const std::string &source)
 
         for (size_t i = 0; i < text.length(); i++)
         {
-            if (isInLineComment) continue;
+            if (isInLineComment)
+                continue;
 
             auto current = text.at(i);
             auto priv = (i == 0) ? '\0' : text.at(i - 1);
@@ -93,7 +100,7 @@ std::string RemoveComment(const std::string &source)
 
         if (!currentLineParsed.empty())
         {
-            targetText.append(currentLineParsed + "\r\n");
+            targetText.append(currentLineParsed + EOL_STRING);
         }
     }
 
@@ -102,6 +109,9 @@ std::string RemoveComment(const std::string &source)
 
     #ifdef QT_CORE_LIB
         #include <QString>
-QString RemoveComment(const QString &str) { return QString::fromStdString(RemoveComment(str.toStdString())); }
+QString RemoveComment(const QString &str)
+{
+    return QString::fromStdString(RemoveComment(str.toStdString()));
+}
     #endif
 #endif // HAS_PUREJSON_HPP
