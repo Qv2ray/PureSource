@@ -32,9 +32,9 @@ std::string RemoveComment(const std::string &source)
             if (isInLineComment)
                 continue;
 
-            auto current = text.at(i);
-            auto priv = (i == 0) ? '\0' : text.at(i - 1);
-            auto next = (i == text.length() - 1) ? '\0' : text.at(i + 1);
+            const auto current = text.at(i);
+            const auto priv = (i == 0) ? '\0' : text.at(i - 1);
+            const auto next = (i == text.length() - 1) ? '\0' : text.at(i + 1);
             //
             bool currentIsBeingEscaped = false;
 
