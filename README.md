@@ -49,6 +49,6 @@ target:    "//this is not a comment, it's /*in the string*/ ", and '//those are 
 
 ```
 
-# Lincese:
+# License:
 PureSource is using MIT
 
